@@ -2,7 +2,7 @@
     "pluginName": "UrlDrawer",
     "description": "网页抽屉",
     "author": "fatedw",
-    "homepage": "https://gitee.com/fatedw/utools-url-drawer",
+    "homepage": "https://github.com/fatedw/utools-url-drawer",
     "main": "index.html",
     "preload": "preload.js",
     "logo": "logo.png",

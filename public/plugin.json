@@ -1,0 +1,33 @@
+{
+    "pluginName": "UrlDrawer",
+    "description": "网页抽屉",
+    "author": "fatedw",
+    "homepage": "https://gitee.com/fatedw/utools-url-drawer",
+    "main": "index.html",
+    "preload": "preload.js",
+    "logo": "logo.png",
+    "platform": ["win32", "darwin", "linux"],
+    "version": "0.0.1",
+    "features": [{
+        "code": "UrlDrawerAdd",
+        "explain": "添加到网页抽屉",
+        "cmds": [
+            {
+                "type": "window",
+                "match": {
+                  "app": ["Google Chrome.app", "chrome.exe"]
+                },
+                "label": "添加到网页抽屉"
+              },
+              {
+                "type": "regex",
+                "label": "UrlDrawerAdd",
+                "match": "/^(https|http):\/\/.*?/i"
+            }
+        ]
+    }, {
+        "code": "UrlDrawerManage",
+        "explain": "设置网页抽屉",
+        "cmds": ["UrlDrawerManage"]
+    }]
+}

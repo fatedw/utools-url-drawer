@@ -13,7 +13,7 @@ module.exports = {
     path: outputPath
   },
   plugins: [
-    new CopyWebpackPlugin({ patterns: [{ from: 'public', to: outputPath }] })
+    new CopyWebpackPlugin({ patterns: [{ from: 'public', to: outputPath, info: { minimized: true } }] })
   ],
   performance: {
     hints: false
@@ -22,7 +22,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        include: path.resolve(__dirname,'./src'),
         use: {
           loader: 'babel-loader',
           options: {

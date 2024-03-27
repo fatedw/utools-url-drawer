@@ -7,7 +7,7 @@
     "preload": "preload.js",
     "logo": "logo.png",
     "platform": ["win32", "darwin", "linux"],
-    "version": "0.0.1",
+    "version": "0.0.2",
     "features": [{
         "code": "UrlDrawerAdd",
         "explain": "添加到网页抽屉",

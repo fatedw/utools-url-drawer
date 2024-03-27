@@ -1,12 +1,12 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "dev": "webpack -w",
     "build": "webpack --mode production"
   },
   "dependencies": {
-    "@ant-design/icons": "^4.7.0",
-    "antd": "^4.20.6",
+    "@ant-design/icons": "^5.3.5",
+    "antd": "^5.15.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-highlight-words": "^0.18.0"

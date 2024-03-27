@@ -1,5 +1,6 @@
 import React from 'react'
 import './index.less'
+import { ConfigProvider, theme } from 'antd';
 
 import UrlDrawerManage from './UrlDrawerManage'
 import UrlDrawerAdd from './UrlDrawerAdd'
@@ -7,7 +8,7 @@ import UrlDrawerList from './UrlDrawerList'
 
 export default class App extends React.Component {
   state = {
-    theme: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
+    appTheme: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
     enter: null
   }
 
@@ -24,7 +25,7 @@ export default class App extends React.Component {
     })
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
       this.setState({
-        theme: e.matches ? 'dark' : 'light'
+        appTheme: e.matches ? 'dark' : 'light'
       })
     })
   }
@@ -52,16 +53,17 @@ export default class App extends React.Component {
   render() {
     const {
       enter,
-      theme
+      appTheme
     } = this.state
-    if (theme == 'dark') {
-      require("antd/dist/antd.dark.css"); 
-    } else{
-      require("antd/dist/antd.css");
-    }
     if (!enter) return false
     return ( 
-      <div className='app-page'>{this.getEnterPage(enter)}</div>
+      <ConfigProvider
+        theme={{
+          algorithm: appTheme == 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm
+        }}
+      >
+        <div className='app-page'>{this.getEnterPage(enter)}</div>
+      </ConfigProvider>
     )
   }
 }

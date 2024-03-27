@@ -16,15 +16,16 @@ export default class UrlDrawerAdd extends React.Component {
     const allData = window.services.queryAllData()
     this.setState({ allUrls: allData })
     if (this.props.type === 'window') {
-      const curUrl = window.utools.getCurrentBrowserUrl()
-      if (!curUrl) {
-        window.utools.outPlugin()
-        utools.showNotification('获取URL失败');
-        return
-      }
-      this.formRef.current.setFieldsValue({
-        url: curUrl,
-      });
+      window.utools.readCurrentBrowserUrl().then((url) => {
+        if (!url) {
+          window.utools.outPlugin()
+          utools.showNotification('获取URL失败');
+          return
+        }
+        this.formRef.current.setFieldsValue({
+          url: url,
+        });
+      })      
     } else if (this.props.type === 'regex') {
       this.formRef.current.setFieldsValue({
         url: this.props.payload,
@@ -63,7 +64,7 @@ export default class UrlDrawerAdd extends React.Component {
           options={allUrls.map((option) => {
             return {'value': option['_id']}
           })}
-          placeholder="如：buy"
+          placeholder="添加后可直接在utools中检索"
           filterOption={(inputValue, option) =>
             option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
           }
@@ -76,7 +77,7 @@ export default class UrlDrawerAdd extends React.Component {
         name='urlKey'
         rules={[{ required: true, message: '请输入关键字' }]}
       >
-        <Input placeholder="如：tb"/>
+        <Input placeholder="可在抽屉名中二次检索"/>
       </Form.Item>
       <Form.Item
         id="url-input"
@@ -84,14 +85,14 @@ export default class UrlDrawerAdd extends React.Component {
         name="url"
         rules={[{ required: true, message: '请输入链接'},{ type: 'url', message: '请输入正确的URL链接' }]}
       >
-        <Input.TextArea autoSize={{ minRows: 2, maxRows: 4 }} placeholder="如：https://www.taobao.com"/>
+        <Input.TextArea autoSize={{ minRows: 2, maxRows: 4 }} placeholder="http/https开头的完整url"/>
       </Form.Item>
       <Form.Item
         id="desc-input"
         label="描述"
         name="desc"
       >
-        <Input placeholder="如：淘宝"/>
+        <Input placeholder="网页功能的简单描述"/>
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 4, span: 18 }}>
